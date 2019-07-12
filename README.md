@@ -1,0 +1,2 @@
+# FlutterMall
+一个用flutter实现的仿网易严选和淘宝电商界面应用
