@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:shppingmall/app/application.dart';
+import 'package:shppingmall/routers/routers.dart';
 import 'homePage.dart';
-
-void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -9,19 +12,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: !bool.fromEnvironment("dart.vm.product"),
+      onGenerateRoute: Application.router.generator,
+      initialRoute: Routers.root,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        //只配置显示中文
+        const Locale.fromSubtags(languageCode: 'zh'),
+//                  const Locale.fromSubtags(languageCode: 'en'),
+      ],
     );
   }
+}
+
+void main() async {
+  //Provider 状态管理，同步数据
+  Provider.debugCheckInvalidValueType = null;
+  //WidgetsFlutterBinding 承担各类的初始化以及功能配置
+  WidgetsFlutterBinding.ensureInitialized();
+  //初始化应用
+  Application.initApp();
+  //打开主页
+  runApp(MyApp());
+  // 调整状态栏颜色
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarBrightness: Brightness.light));
 }
