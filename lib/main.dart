@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         providers: globalProvider,
         child: Consumer<ThemeViewModel>(
           builder: (context, data, child) {
+            data.updateSystemModel(context, notify: false);
             return RefreshConfiguration(
               hideFooterWhenNotFull: true,
               headerBuilder: () => WaterDropHeader(),

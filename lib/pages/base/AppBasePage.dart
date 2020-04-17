@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mall/viewmodel/impl/theme_view_model.dart';
 
 class AppBasePage extends StatefulWidget {
   //中间的body
@@ -28,7 +29,25 @@ class AppBasePage extends StatefulWidget {
   _AppBasePageState createState() => _AppBasePageState();
 }
 
-class _AppBasePageState extends State<AppBasePage> {
+class _AppBasePageState extends State<AppBasePage> with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    ThemeUtil.setSystemThemeModel(context, notify: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (this.widget.showAppBar) {
