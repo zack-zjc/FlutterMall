@@ -10,8 +10,8 @@ class ThemeUtil {
   }
 
   ///设置系统主题Model是否黑暗模式等
-  static void setSystemThemeModel(BuildContext context, {bool notify: false}) {
-    Provider.of<ThemeViewModel>(context, listen: false).updateSystemModel(context, notify: notify);
+  static void setSystemThemeModel(BuildContext context) {
+    Provider.of<ThemeViewModel>(context, listen: false).updateSystemModel(context);
   }
 }
 
@@ -22,14 +22,17 @@ class ThemeViewModel extends BaseViewModel {
   //用户设置是否黑暗模式
   ThemeModel userSetModel = _getUserSetModel();
 
+  ///初始化系统设置
+  void initSystemModel() {
+    isSystemDarkModel = WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
+  }
+
   ///更新系统模式
-  void updateSystemModel(BuildContext context, {bool notify: false}) {
+  void updateSystemModel(BuildContext context) {
     var updateModel = MediaQuery.of(context).platformBrightness == Brightness.dark;
     if (updateModel != isSystemDarkModel) {
       isSystemDarkModel = updateModel;
-      if (notify) {
-        notifyListeners();
-      }
+      notifyListeners();
     }
   }
 

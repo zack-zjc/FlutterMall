@@ -44,7 +44,7 @@ class _AppBasePageState extends State<AppBasePage> with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    ThemeUtil.setSystemThemeModel(context, notify: true);
+    ThemeUtil.setSystemThemeModel(context);
   }
 
   @override

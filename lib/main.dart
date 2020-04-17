@@ -1,9 +1,9 @@
-import 'package:mall/app/application.dart';
-import 'package:mall/routers/routers.dart';
-import 'package:mall/viewmodel/impl/theme_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mall/app/application.dart';
+import 'package:mall/routers/routers.dart';
+import 'package:mall/viewmodel/impl/theme_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         providers: globalProvider,
         child: Consumer<ThemeViewModel>(
           builder: (context, data, child) {
-            data.updateSystemModel(context, notify: false);
+            data.initSystemModel();
             return RefreshConfiguration(
               hideFooterWhenNotFull: true,
               headerBuilder: () => WaterDropHeader(),
