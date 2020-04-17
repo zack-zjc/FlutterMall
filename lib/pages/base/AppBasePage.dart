@@ -30,7 +30,6 @@ class AppBasePage extends StatefulWidget {
 }
 
 class _AppBasePageState extends State<AppBasePage> with WidgetsBindingObserver {
-
   @override
   void initState() {
     super.initState();
