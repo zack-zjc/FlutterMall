@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:fluro/fluro.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mall/routers/routers.dart';
 import 'package:mall/utils/database.dart';
 import 'package:mall/utils/network.dart';
 import 'package:mall/utils/preference.dart';
+import 'package:fluro/fluro.dart';
+import 'package:flutter/widgets.dart';
 
 class Application {
   ///网络地址
@@ -34,7 +34,7 @@ class Application {
     PreferenceUtil.initPreference();
     router = new Router();
     Routers.configureRoutes(router);
-    initNetwork();
+    initNetwork(enableCookie: true);
   }
 
   ///初始化网络库

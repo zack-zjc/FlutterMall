@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 import 'package:mall/utils/log.dart';
 import 'package:mall/viewmodel/base_view_model.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 ///封装selector的相关使用
 ///添加了答应用于优化控件刷新

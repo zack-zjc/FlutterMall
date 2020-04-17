@@ -1,6 +1,6 @@
-import 'package:path/path.dart';
 import 'package:mall/model/database_bean.dart';
 import 'package:mall/utils/log.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:synchronized/synchronized.dart';
 

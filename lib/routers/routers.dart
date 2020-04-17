@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:mall/routers/router_list.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:mall/routers/router_list.dart';
 
 import 'router_handler.dart';
 

@@ -1,5 +1,5 @@
 import 'package:mall/utils/log.dart';
-import 'package:mall/viewmodel/base_view_model.dart';
+import 'base_view_model.dart';
 
 abstract class BaseListViewModel<T> extends BaseViewModel {
   //加载index

@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 import 'package:mall/utils/log.dart';
 import 'package:mall/viewmodel/base_view_model.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 ///consumer封装的控件，添加打印用于优化刷新
 class ProviderConsumerWidget<T extends BaseViewModel> extends StatefulWidget {

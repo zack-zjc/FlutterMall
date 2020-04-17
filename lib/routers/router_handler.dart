@@ -1,6 +1,6 @@
+import 'package:mall/pages/app_splash_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:mall/pages/app_splash_page.dart';
 
 // app的开屏页
 var splashHandler = new Handler(

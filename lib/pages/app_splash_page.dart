@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mall/app/application.dart';
 import 'package:mall/routers/routers.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 ///开屏页面
 class AppSplashPage extends StatefulWidget {

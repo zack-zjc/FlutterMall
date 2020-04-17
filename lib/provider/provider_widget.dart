@@ -1,10 +1,10 @@
-import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:mall/utils/log.dart';
 import 'package:mall/viewmodel/base_list_view_model.dart';
 import 'package:mall/viewmodel/base_view_model.dart';
 import 'package:mall/viewmodel/view_state_widget.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ///provider的封装类，方便使用独立控件使用
 ///listen:是否添加根部consumer
