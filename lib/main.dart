@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
               footerBuilder: () => ClassicFooter(),
               child: MaterialApp(
                 debugShowCheckedModeBanner: !bool.fromEnvironment("dart.vm.product"),
-                themeMode: data.userSetModel,
+                themeMode: data.userSetMode,
                 theme: data.getAppTheme(false),
                 darkTheme: data.getAppTheme(true),
                 onGenerateRoute: Application.router.generator,
