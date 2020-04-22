@@ -22,7 +22,7 @@ class ThemeViewModel extends BaseViewModel {
 
   ///更新系统模式
   void updateSystemModel(BuildContext context) {
-    if (userSetMode == ThemeMode.system){
+    if (userSetMode == ThemeMode.system) {
       notifyListeners();
     }
   }
