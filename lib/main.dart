@@ -24,15 +24,15 @@ class MyApp extends StatelessWidget {
         providers: globalProvider,
         child: Consumer<ThemeViewModel>(
           builder: (context, data, child) {
-            data.initSystemModel();
             return RefreshConfiguration(
               hideFooterWhenNotFull: true,
               headerBuilder: () => WaterDropHeader(),
               footerBuilder: () => ClassicFooter(),
               child: MaterialApp(
                 debugShowCheckedModeBanner: !bool.fromEnvironment("dart.vm.product"),
-                theme: data.getAppTheme(),
-                darkTheme: data.getAppTheme(),
+                themeMode: data.userSetModel,
+                theme: data.getAppTheme(false),
+                darkTheme: data.getAppTheme(true),
                 onGenerateRoute: Application.router.generator,
                 initialRoute: Routers.root,
                 localizationsDelegates: [

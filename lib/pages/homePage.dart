@@ -10,7 +10,7 @@ class MyHomePage extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: GestureDetector(
           onTap: () {
-            ThemeUtil.setThemeModel(context, ThemeModel.LIGHT);
+            ThemeUtil.setThemeModel(context, ThemeMode.light);
           },
           child: Center(
             child: Text("测试"),
