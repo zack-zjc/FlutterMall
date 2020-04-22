@@ -1,5 +1,5 @@
 import 'package:mall/pages/app_splash_page.dart';
-import 'package:mall/pages/homePage.dart';
+import 'package:mall/pages/home_page.dart';
 import 'package:mall/routers/routers.dart';
 import 'package:flutter/material.dart';
 

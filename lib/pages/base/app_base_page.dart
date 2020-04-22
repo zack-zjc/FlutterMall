@@ -1,45 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:mall/viewmodel/impl/theme_view_model.dart';
 
-class AppBasePage extends StatefulWidget {
-  //中间的body
-  final Widget bodyWidget;
-  //页面标题
-  final String title;
-  //是否展示appbar
-  final bool showAppBar;
-  //右上角点击事件
-  final VoidCallback menuCallback;
-  //更多文字操作
-  final String actionText;
-  //更多操作本地图片
-  final String actionImage;
-
-  AppBasePage({
-    Key key,
-    @required this.bodyWidget,
-    this.title,
-    this.menuCallback,
-    this.showAppBar: true,
-    this.actionText,
-    this.actionImage,
-  }) : super(key: key);
-
+///封装的页面基类
+abstract class AppBasePage extends StatefulWidget {
   @override
   _AppBasePageState createState() => _AppBasePageState();
+
+  ///是否展示头部bar
+  bool showAppBar() => true;
+
+  ///获取标题
+  String getTitle(BuildContext context) => "";
+
+  ///获取menu文字
+  String getActionText(BuildContext context) => null;
+
+  ///获取menu本地图片
+  String getActionImage(BuildContext context) => null;
+
+  ///获取menu点击事件
+  VoidCallback getMenuCallback(BuildContext context) => null;
+
+  ///初始化相关操作
+  void didInitState(BuildContext context) {}
+
+  ///dispose相关操作
+  void didDispose(BuildContext context) {}
+
+  ///获取页面body
+  Widget getBody(BuildContext context);
 }
+
+//是否展示欢迎页
+bool showSplashPage = false;
 
 class _AppBasePageState extends State<AppBasePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    this.widget.didInitState(context);
   }
 
   @override
   void dispose() {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
+    this.widget.didDispose(context);
   }
 
   @override
@@ -48,16 +55,37 @@ class _AppBasePageState extends State<AppBasePage> with WidgetsBindingObserver {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
+      showSplashPage = true;
+    } else if (state == AppLifecycleState.resumed) {
+      if (showSplashPage) {
+        showSplashPage = false;
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (this.widget.showAppBar) {
+    if (this.widget.showAppBar()) {
       return Scaffold(
         appBar: CustomAppBar(
-            title: this.widget.title, actionText: this.widget.actionText, actionImage: this.widget.actionImage, tapCallback: this.widget.menuCallback),
-        body: this.widget.bodyWidget,
+            title: this.widget.getTitle(context),
+            actionText: this.widget.getActionText(context),
+            actionImage: this.widget.getActionImage(context),
+            tapCallback: this.widget.getMenuCallback(context)),
+        body: Builder(
+          builder: (builderContext) => this.widget.getBody(builderContext),
+        ),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       );
     }
     return Scaffold(
-      body: this.widget.bodyWidget,
+      body: Builder(
+        builder: (builderContext) => this.widget.getBody(builderContext),
+      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     );
   }
 }
@@ -79,8 +107,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.actionText,
     this.actionImage,
     this.tapCallback,
-  })  : assert(title != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
@@ -125,7 +152,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   ///获取自定义更多操作按钮
   _getActionWidget() {
-    var widgetSize = Theme.of(context).appBarTheme.iconTheme.size;
+    var widgetSize = Theme.of(context).appBarTheme.actionsIconTheme.size;
     if (this.widget.actionImage != null) {
       return Image.asset(
         this.widget.actionImage,
